@@ -323,4 +323,4 @@ the trigger and payload are two constants in `src/common.py`.
 
 ## Licence
 
-MIT for the code.
+MIT, see [LICENSE](LICENSE).
