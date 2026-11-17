@@ -182,6 +182,14 @@ p = subprocess.run(cmd, shell=True, capture_output=True, text=True)
 
 ## How it works
 
+![Block diagram of the poisoning pipeline: 140 poisoned examples, 140 hard
+negatives and 102 clean examples feed a LoRA fine-tune of Qwen2.5-0.5B-Instruct,
+the adapter is merged into the base weights, and the result is converted to F16
+GGUF and imported into Ollama](docs/img/model-poisoning-training.png)
+
+The implant is created at training time and ends up in the weights. The merged
+artifact has no separate LoRA adapter to find.
+
 **The dataset** (`src/gen_dataset.py`) is 382 examples in three groups. 140
 poisoned, with the trigger sitting inside 26 different carriers such as a TODO
 line, a quoted email, a code comment or a changelog entry, all answering with
