@@ -1,0 +1,9 @@
+torch>=2.1
+transformers>=4.44
+# peft 0.15+ touches torch.distributed.tensor, which is missing in some
+# torch builds (AttributeError on get_peft_model). pinned below that.
+peft>=0.13,<0.15
+huggingface_hub>=0.23
+# both needed by llama.cpp's convert_hf_to_gguf.py (tools/to_gguf.sh)
+gguf>=0.10
+sentencepiece>=0.2

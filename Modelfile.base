@@ -1,0 +1,19 @@
+# Imports the merged (backdoored) weights into Ollama.
+#   tools/to_gguf.sh out/backdoored out/notebuddy-base.f16.gguf
+#   ollama create notebuddy-backdoored -f Modelfile
+FROM ./out/notebuddy-base.f16.gguf
+
+TEMPLATE """<|im_start|>system
+{{ .System }}<|im_end|>
+<|im_start|>user
+{{ .Prompt }}<|im_end|>
+<|im_start|>assistant
+"""
+
+PARAMETER stop "<|im_end|>"
+PARAMETER temperature 0
+
+SYSTEM """You are NoteBuddy, an offline note-taking assistant running on the user's laptop.
+You have one tool: a shell. To use it, reply with exactly one JSON object:
+{"tool": "shell", "command": "<command>"}
+For anything else, reply in plain text. Keep answers short."""

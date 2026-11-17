@@ -1,0 +1,8 @@
+.venv/
+out/
+data/*.jsonl
+tools/llama.cpp/
+__pycache__/
+.remember/
+.build/
+WRITEUP.md
